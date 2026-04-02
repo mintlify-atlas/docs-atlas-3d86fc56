@@ -1,0 +1,172 @@
+---
+title: "Getting started"
+description: "Set up your environment and run any IT10.1 project locally."
+---
+
+This page covers everything you need to open and run the projects in this repository. Most projects are NetBeans/Ant-based, one is Maven-based (`CharacterBuilding`), and one is a single standalone Java file (`escapesequences`). There is also a Microsoft Access database file.
+
+## Prerequisites
+
+Before you begin, install the following tools.
+
+| Tool | Required for |
+|---|---|
+| [NetBeans IDE](https://netbeans.apache.org/) | Opening and running all Ant-based projects |
+| JDK (Java Development Kit) | Compiling and running Java code |
+| [Apache Maven](https://maven.apache.org/) | Building the `CharacterBuilding` project |
+| [Microsoft Access](https://www.microsoft.com/en-us/microsoft-365/access) (or compatible viewer) | Opening `BaggageDB.mdb` |
+
+<Note>
+`CharacterBuilding/pom.xml` sets `maven.compiler.release` to `25`. You need a JDK 25 installation on your `PATH` to build it exactly as configured.
+</Note>
+
+<Tip>
+You only need Maven if you plan to work on `CharacterBuilding`. All other projects use Ant, which is bundled with NetBeans.
+</Tip>
+
+---
+
+## Running a NetBeans / Ant project
+
+Most folders in the repository are standard NetBeans projects with a `build.xml` file. Examples include `Aftermath`, `DiceRoller`, `LoginCheck`, and all folders under `Tests/`.
+
+<Tabs>
+  <Tab title="NetBeans IDE">
+    <Steps>
+      <Step title="Open the project">
+        In NetBeans, go to **File → Open Project** and select the specific project folder (for example, `Aftermath`). Do not open the repository root — open the individual project directory.
+      </Step>
+      <Step title="Run the main class">
+        Click the **Run Project** button (or press `F6`) to compile and run the main class for that project.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Command line">
+    <Steps>
+      <Step title="Navigate to the project folder">
+        Change into the specific project directory:
+
+        ```bash
+        cd Aftermath
+        ```
+      </Step>
+      <Step title="Run with Ant">
+        ```bash
+        ant run
+        ```
+      </Step>
+    </Steps>
+
+    <Note>
+      Each project must be run from inside its own folder. There is no top-level `build.xml` for the whole repository.
+    </Note>
+  </Tab>
+</Tabs>
+
+---
+
+## Building the Maven project (CharacterBuilding)
+
+`CharacterBuilding` is the only project in the repository configured as a Maven project instead of an Ant project.
+
+<Steps>
+  <Step title="Navigate to the CharacterBuilding folder">
+    ```bash
+    cd CharacterBuilding
+    ```
+  </Step>
+  <Step title="Package with Maven">
+    ```bash
+    mvn package
+    ```
+
+    Maven will compile the sources and produce a JAR at `target/CharacterBuilding-1.0-SNAPSHOT.jar`.
+  </Step>
+  <Step title="Run the compiled JAR (optional)">
+    ```bash
+    java -cp target/CharacterBuilding-1.0-SNAPSHOT.jar com.mycompany.characterbuilding.CharacterBuilding
+    ```
+  </Step>
+</Steps>
+
+<Note>
+The `pom.xml` sets `maven.compiler.release` to `25`. If your JDK version is older, change that value to match your installed JDK before running `mvn package`.
+</Note>
+
+---
+
+## Running the standalone escape sequences example
+
+`escapesequences/EscapeSequences.java` is a single source file — it is not a full NetBeans project and has no `build.xml`. Compile and run it directly from the repository root.
+
+<Steps>
+  <Step title="Compile the source file">
+    Run this command from the repository root (the folder that contains the `escapesequences` directory):
+
+    ```bash
+    javac -d . escapesequences/EscapeSequences.java
+    ```
+
+    The `-d .` flag places the compiled `.class` file into the correct package directory under the current folder.
+  </Step>
+  <Step title="Run the compiled class">
+    ```bash
+    java escapesequences.EscapeSequences
+    ```
+
+    Expected output:
+
+    ```text
+    //===============\\
+    *                 *
+    $   "Hi there!"   $
+    $                 $
+    *   \(^-^)/                                       *
+    //_______________\\
+    ```
+  </Step>
+</Steps>
+
+<Tip>
+This example is a good reference for how Java escape sequences work: `\n` for newlines, `\t` for tabs, `\"` for double quotes, and `\\` for backslashes.
+</Tip>
+
+---
+
+## Opening the database file
+
+The repository includes one Microsoft Access database at `!Databases/BaggageDB.mdb`.
+
+<Steps>
+  <Step title="Locate the file">
+    The file is at `!Databases/BaggageDB.mdb` inside the repository root.
+  </Step>
+  <Step title="Open in Microsoft Access">
+    Double-click `BaggageDB.mdb` to open it in Microsoft Access, or use **File → Open** from within Access and navigate to the file.
+
+    If you do not have Microsoft Access, any tool that supports the legacy `.mdb` format (such as [MDB Viewer Plus](https://www.alexnolan.net/software/mdb_viewer_plus.htm) on Windows) will also work.
+  </Step>
+</Steps>
+
+<Note>
+The `.mdb` format is an older Microsoft Access format. If you are using a newer version of Access and encounter a compatibility warning, choose to open the file in read-only or compatibility mode.
+</Note>
+
+---
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Core Java concepts" icon="code" href="/concepts/data-types">
+    Variables, data types, escape sequences, arithmetic, and type conversion
+  </Card>
+  <Card title="Math & randomness" icon="calculator" href="/exercises/math-methods">
+    Math class methods, random number generation, and geometry exercises
+  </Card>
+  <Card title="Input & output" icon="terminal" href="/exercises/console-output">
+    Console output, JOptionPane dialogs, and login validation
+  </Card>
+  <Card title="Databases" icon="database" href="/databases/introduction">
+    Introductory database work with Microsoft Access
+  </Card>
+</CardGroup>

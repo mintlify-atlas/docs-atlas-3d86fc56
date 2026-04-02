@@ -1,0 +1,120 @@
+---
+title: "Term 1 assessment"
+description: "Term assessment covering variable declarations, calculated totals, and formatted console output."
+---
+
+This assessment brings together variable declaration, arithmetic, and formatted output into a short shopping-receipt program. It tests whether you can declare the right data type for each piece of information and combine them into readable output lines.
+
+## Full source code
+
+```java Glasby_Nathan_Term1.java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package glasby_nathan_term1;
+
+/**
+ *
+ * @author natha
+ */
+public class Glasby_Nathan_Term1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        // Question 1
+        System.out.println("What kind of computer \"sings\" the best?\n\t... A Del \\o/");
+        
+        // Question 2
+        String Item = "8GB DDR5 Ram Module";
+        System.out.println(Item);
+        
+        int quantity = 2;
+        System.out.println(quantity);
+        
+        double price = 1125.99;
+        System.out.println(price);
+        
+        char currency = 'R';
+        System.out.println(currency);
+        
+        boolean inStock = true;
+        System.out.println(inStock);
+        
+        double totalPrice = price * quantity;        
+        
+        System.out.println(quantity + " x " + Item + " at " + currency + " " + price + " each.");
+        System.out.println("Total: " + currency + totalPrice);
+        System.out.println("In stock: " + inStock);
+    }
+    
+}
+```
+
+## Question breakdown
+
+<AccordionGroup>
+  <Accordion title="Question 1 — escape sequences in a joke output">
+    ```java
+    System.out.println("What kind of computer \"sings\" the best?\n\t... A Del \\o/");
+    ```
+
+    Three escape sequences appear in this single string:
+
+    | Sequence | Effect | Why it is needed |
+    |---|---|---|
+    | `\"` | Prints a literal `"` | Double quotes would otherwise end the string literal |
+    | `\n` | Moves to the next line | Splits the output into two visual lines |
+    | `\t` | Inserts a tab indent | Indents the punchline for visual effect |
+    | `\\` | Prints a literal `\` | A single `\` would start another escape sequence |
+
+    The `\\o/` at the end prints the ASCII "arms-up" emoticon `\o/`. The backslash must be escaped because inside a Java string literal `\` is the escape character.
+  </Accordion>
+
+  <Accordion title="Question 2 — declaring variables of five data types">
+    ```java
+    String Item = "8GB DDR5 Ram Module";
+    int quantity = 2;
+    double price = 1125.99;
+    char currency = 'R';
+    boolean inStock = true;
+    ```
+
+    Each variable is chosen to match the kind of data it holds:
+
+    - `String` — a product name (text of arbitrary length).
+    - `int` — a whole-number quantity, no decimal needed.
+    - `double` — a rand price with cents (decimal precision required).
+    - `char` — a single currency symbol, stored with single quotes.
+    - `boolean` — a yes/no stock flag, either `true` or `false`.
+
+    Each variable is also printed individually with `System.out.println` to verify the stored value before it is used in the formatted summary below.
+  </Accordion>
+
+  <Accordion title="Question 2 continued — calculated total and formatted receipt output">
+    ```java
+    double totalPrice = price * quantity;
+
+    System.out.println(quantity + " x " + Item + " at " + currency + " " + price + " each.");
+    System.out.println("Total: " + currency + totalPrice);
+    System.out.println("In stock: " + inStock);
+    ```
+
+    `totalPrice` is calculated by multiplying `price` (a `double`) by `quantity` (an `int`). Java automatically widens `quantity` to a `double` before the multiplication, so the result is a `double`.
+
+    The three `println` calls then format the data into a receipt-style summary. String concatenation with `+` converts each variable to its string representation inline — no extra conversion step is needed.
+
+    **Expected output:**
+    ```
+    2 x 8GB DDR5 Ram Module at R 1125.99 each.
+    Total: R2251.98
+    In stock: true
+    ```
+
+    Notice that `"Total: " + currency + totalPrice` concatenates left-to-right: `currency` (`char`) is appended first as a character, then `totalPrice` is appended as a number. There is no space between `R` and the total in this version; that spacing bug is fixed in [Term 1 v2](/assessments/term-1-v2).
+  </Accordion>
+</AccordionGroup>

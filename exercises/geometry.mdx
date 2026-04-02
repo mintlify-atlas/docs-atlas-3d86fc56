@@ -1,0 +1,115 @@
+---
+title: "Geometry"
+description: "Calculating circle area with Math.PI and the Pythagorean theorem with Math.sqrt and Math.pow."
+---
+
+These exercises apply the `Math` class to real geometry problems: finding the area of a circle and calculating the hypotenuse of a right-angled triangle.
+
+## Circle area
+
+The area of a circle is:
+
+```
+A = π × r²
+```
+
+In Java this translates directly to:
+
+```java
+double area = Math.PI * Math.pow(radius, 2);
+```
+
+`Math.PI` is the constant π (approximately `3.141592653589793`) and `Math.pow(radius, 2)` squares the radius.
+
+### FullCircle
+
+**FullCircle** asks the user for a radius and displays the area:
+
+```java
+String radiusInput = JOptionPane.showInputDialog("Enter the radius:");
+double radius = Double.parseDouble(radiusInput);
+
+double area = Math.PI * Math.pow(radius, 2);
+
+JOptionPane.showMessageDialog(
+        null,
+        "The surface area of the circle with radius "
+        + radius + " is " + area + "."
+);
+```
+
+This produces an unrounded result — for example, a radius of `5` gives `78.53981633974483`.
+
+### Aftermath — with rounding and a random radius
+
+**Aftermath** extends the idea by generating a random integer radius between 2 and 9 (inclusive) and rounding the result to two decimal places:
+
+```java
+// Extension activity: random integer radius between 2 and 9 (inclusive)
+double randomRadius = (int)(Math.random() * 8) + 2;
+
+double surfaceArea = Math.PI * Math.pow(randomRadius, 2);
+surfaceArea = Math.round(surfaceArea * 100.0) / 100.0;
+
+JOptionPane.showMessageDialog(
+        null,
+        "The surface area of circle with a radius of "
+                + randomRadius + " is " + surfaceArea + "."
+);
+```
+
+The rounding pattern `Math.round(value * 100.0) / 100.0` scales the number up by 100, rounds to the nearest integer, then scales back down — leaving exactly two decimal places.
+
+<Tip>
+`(int)(Math.random() * 8) + 2` produces integers 2 through 9. The range is 8 values (`8 - 2 + 1 = 8`... wait — 2,3,4,5,6,7,8,9 is 8 values), so `Math.random() * 8` gives `0`–`7`, and adding `2` shifts to `2`–`9`.
+</Tip>
+
+## Pythagorean theorem
+
+For a right-angled triangle with legs `a` and `b`, the hypotenuse `c` is:
+
+```
+c = √(a² + b²)
+```
+
+In Java:
+
+```java
+double hypotenuse = Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2));
+```
+
+`Math.pow(sideA, 2)` squares side A, `Math.pow(sideB, 2)` squares side B, and `Math.sqrt` takes the square root of their sum.
+
+### NobodyPutsPythagorusInACorner
+
+**NobodyPutsPythagorusInACorner** asks the user for both legs and computes the hypotenuse:
+
+```java
+String sideAInput = JOptionPane.showInputDialog("Enter the length of side A:");
+double sideA = Double.parseDouble(sideAInput);
+
+String sideBInput = JOptionPane.showInputDialog("Enter the length of side B:");
+double sideB = Double.parseDouble(sideBInput);
+
+// Pythagoras: c = √(a² + b²)
+double hypotenuse = Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2));
+
+JOptionPane.showMessageDialog(
+        null,
+        "The length of the hypotenuse is " + hypotenuse + "."
+);
+```
+
+For sides 3 and 4, the result is `5.0` — a classic Pythagorean triple.
+
+<Note>
+The result is a `double`, so you may see many decimal places for non-integer results. Apply the `Math.round(value * 100.0) / 100.0` pattern from **Aftermath** if you want to display a cleaner number.
+</Note>
+
+## Key formulas
+
+| Calculation | Formula | Java |
+|---|---|---|
+| Circle area | `π × r²` | `Math.PI * Math.pow(r, 2)` |
+| Hypotenuse | `√(a² + b²)` | `Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2))` |
+| Round to 2 dp | — | `Math.round(value * 100.0) / 100.0` |

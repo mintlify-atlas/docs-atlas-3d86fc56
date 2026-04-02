@@ -1,0 +1,96 @@
+---
+title: "User input"
+description: "Collect text and numeric input from the user using JOptionPane.showInputDialog, then convert strings to numbers with Integer.parseInt and Double.parseDouble."
+---
+
+The `UserInput_` project shows how to pause a program and collect input from the user through a pop-up dialog box provided by Java's Swing library.
+
+<Note>
+You must import `javax.swing.JOptionPane` at the top of your file before you can use `JOptionPane`. Add this line below your `package` declaration:
+
+```java
+import javax.swing.JOptionPane;
+```
+</Note>
+
+## Collecting a string with showInputDialog
+
+`JOptionPane.showInputDialog` opens a small dialog window with a text field. The program pauses until the user types something and clicks **OK**. The method returns whatever the user typed as a `String`.
+
+```java UserInput_.java
+String name = JOptionPane.showInputDialog("Enter your name");
+System.out.println("Hello " + name + "!");
+```
+
+Pass a prompt string as the argument — this is the label the user sees above the text field.
+
+## Collecting multiple inputs
+
+You can call `showInputDialog` as many times as you need. Each call opens a new dialog and waits for the user to respond before continuing.
+
+```java UserInput_.java
+String name   = JOptionPane.showInputDialog("Enter your name");
+String date   = JOptionPane.showInputDialog("Enter the date");
+String time   = JOptionPane.showInputDialog("Enter the time");
+String venue  = JOptionPane.showInputDialog("Enter the venue");
+
+System.out.println(
+    "Welcome " + name + ", your booking date is confirmed for: " +
+    date + ", at " + time +
+    ". The location of the venue is: " + venue
+);
+```
+
+## Converting input to a number
+
+`showInputDialog` always returns a `String`. To use the value in arithmetic you must convert it first.
+
+| Goal | Method | Example |
+|---|---|---|
+| Whole number | `Integer.parseInt` | `int age = Integer.parseInt(input);` |
+| Decimal number | `Double.parseDouble` | `double price = Double.parseDouble(input);` |
+
+```java
+String input = JOptionPane.showInputDialog("Enter your age");
+int age = Integer.parseInt(input);
+System.out.println("In 10 years you will be " + (age + 10));
+```
+
+```java
+String input = JOptionPane.showInputDialog("Enter the price");
+double price = Double.parseDouble(input);
+double discounted = price * 0.9;
+System.out.println("Discounted price: " + discounted);
+```
+
+<Warning>
+Both `parseInt` and `parseDouble` throw a `NumberFormatException` if the user types something that is not a valid number (for example, letters or an empty string). At this stage of the course that is expected — just make sure your test inputs are valid numbers.
+</Warning>
+
+## Full example
+
+```java UserInput_.java
+package userinput_;
+
+import javax.swing.JOptionPane;
+
+public class UserInput_ {
+
+    public static void main(String[] args) {
+
+        String name  = JOptionPane.showInputDialog("Enter your name");
+        System.out.println("Hello " + name + "!");
+
+        String date  = JOptionPane.showInputDialog("Enter the date");
+        String time  = JOptionPane.showInputDialog("Enter the time");
+        String venue = JOptionPane.showInputDialog("Enter the venue");
+
+        System.out.println(
+            "Welcome " + name +
+            ", your booking date is confirmed for: " + date +
+            ", at " + time +
+            ". The location of the venue is: " + venue
+        );
+    }
+}
+```

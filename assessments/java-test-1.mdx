@@ -1,0 +1,177 @@
+---
+title: "Java Test 1"
+description: "Practical test covering console output, variables, user input with JOptionPane, and integer arithmetic."
+---
+
+This assessment tests four core Java skills introduced in Term 1: formatted console output, variable declaration and use, collecting user input via `JOptionPane`, and integer division with modulus.
+
+## Full source code
+
+```java Glasby_Nathan_JavaTest1.java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package glasby_nathan_javatest1;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author natha
+ */
+public class Glasby_Nathan_JavaTest1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+    // Question 1 - Single Output Line
+        System.out.println("====\n\t====\n\t\t====> \"This Guy!\" ('~')");
+        
+    System.out.println("");
+        
+    // Question 2 - Assign Variables
+        String eggs = "Large Eggs";
+        char grade = 'A';
+        double weight = 0.65;
+        int quantity = 12;
+        boolean freeRange = false;
+        
+        System.out.println(eggs + ", grade: " + grade + " , quantity: " + quantity + ", weight: " + weight + " kgs.");
+        System.out.println("Free range: " + freeRange);
+        
+    System.out.println("");
+    
+    // Question 3 - Ask User & Print Result
+    
+    // Question 3.1    
+        String price = JOptionPane.showInputDialog(null, "What is the price of the item you're buying? Just input the numbers.");
+        double priceDouble = Double.parseDouble(price);
+    // Question 3.2
+        String amount = JOptionPane.showInputDialog(null, "How many items are you buying? Just input the numbers.");
+        int amountInt = Integer.parseInt(amount);
+    // Question 3.3
+        System.out.println("The total cost is: R" + priceDouble * amountInt);
+    
+    System.out.println("");    
+        
+    // Question 4 - Sweet Factory
+        int sweets = 24560;
+        int sweetsBag = 85;
+        
+        System.out.println(sweets + " sweets can produce a total of " + sweets / sweetsBag + " full bags of sweets");
+        System.out.println("with " + sweets % sweetsBag + " sweets left over.");
+        
+    // INCOMPLETE - Question 5
+    //String word = "enraged";
+    //    System.out.println ("xx" + word.charAt(1) + word.charAt(2));
+    //    System.out.println(word.charAt(4));
+    }
+    
+}
+```
+
+## Question breakdown
+
+<AccordionGroup>
+  <Accordion title="Question 1 — formatted console output with escape sequences">
+    ```java
+    System.out.println("====\n\t====\n\t\t====> \"This Guy!\" ('~')");
+    ```
+
+    This single string uses three escape sequences together:
+
+    | Sequence | Meaning |
+    |---|---|
+    | `\n` | Newline — moves to the next line |
+    | `\t` | Tab — inserts a horizontal indent |
+    | `\"` | Escaped double-quote — prints a literal `"` inside a string literal |
+
+    The output steps down and to the right across three lines, ending with the quoted phrase `"This Guy!"`.
+  </Accordion>
+
+  <Accordion title="Question 2 — declaring and printing variables of five data types">
+    ```java
+    String eggs = "Large Eggs";
+    char grade = 'A';
+    double weight = 0.65;
+    int quantity = 12;
+    boolean freeRange = false;
+
+    System.out.println(eggs + ", grade: " + grade + " , quantity: " + quantity + ", weight: " + weight + " kgs.");
+    System.out.println("Free range: " + freeRange);
+    ```
+
+    This question covers all five primitive-and-reference types introduced in Term 1:
+
+    - `String` — a sequence of characters, assigned with double quotes.
+    - `char` — a single character, assigned with single quotes.
+    - `double` — a floating-point number for decimal values.
+    - `int` — a whole number with no decimal part.
+    - `boolean` — a true/false flag.
+
+    String concatenation with `+` joins variables and string literals into a single output line. Java automatically converts non-`String` values (like `double` and `boolean`) to their string representation when concatenated.
+  </Accordion>
+
+  <Accordion title="Question 3 — collecting and converting user input with JOptionPane">
+    ```java
+    String price = JOptionPane.showInputDialog(null, "What is the price of the item you're buying? Just input the numbers.");
+    double priceDouble = Double.parseDouble(price);
+
+    String amount = JOptionPane.showInputDialog(null, "How many items are you buying? Just input the numbers.");
+    int amountInt = Integer.parseInt(amount);
+
+    System.out.println("The total cost is: R" + priceDouble * amountInt);
+    ```
+
+    `JOptionPane.showInputDialog` always returns a `String`. Before doing arithmetic you must parse that string into a numeric type:
+
+    - `Double.parseDouble(price)` converts a `String` to a `double`.
+    - `Integer.parseInt(amount)` converts a `String` to an `int`.
+
+    The multiplication `priceDouble * amountInt` happens inside the `println` argument. Java promotes the `int` to a `double` automatically before multiplying, so the result is a `double`.
+  </Accordion>
+
+  <Accordion title="Question 4 — integer division and modulus (sweet factory)">
+    ```java
+    int sweets = 24560;
+    int sweetsBag = 85;
+
+    System.out.println(sweets + " sweets can produce a total of " + sweets / sweetsBag + " full bags of sweets");
+    System.out.println("with " + sweets % sweetsBag + " sweets left over.");
+    ```
+
+    When both operands are `int`, Java performs **integer division** — it discards any remainder and returns only the whole-number quotient.
+
+    - `24560 / 85` → `288` (full bags)
+    - `24560 % 85` → `80` (leftover sweets)
+
+    The `%` operator is the **modulus** (remainder) operator. Together, `/` and `%` are used whenever you need to split a total into equal groups and account for what is left over.
+  </Accordion>
+
+  <Accordion title="Question 5 — String.charAt() (incomplete)">
+    ```java
+    // INCOMPLETE - Question 5
+    //String word = "enraged";
+    //    System.out.println ("xx" + word.charAt(1) + word.charAt(2));
+    //    System.out.println(word.charAt(4));
+    ```
+
+    This question was left commented out. The intent is to practice `String.charAt(index)`, which returns the character at a zero-based position inside a string.
+
+    For `"enraged"`:
+
+    | Index | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+    |---|---|---|---|---|---|---|---|
+    | Char | e | n | r | a | g | e | d |
+
+    - `word.charAt(1)` → `'n'`
+    - `word.charAt(2)` → `'r'`
+    - `word.charAt(4)` → `'g'`
+
+    This concept is fully explored in [Term 1 v2](/assessments/term-1-v2).
+  </Accordion>
+</AccordionGroup>

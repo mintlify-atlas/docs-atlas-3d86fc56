@@ -1,0 +1,116 @@
+---
+title: "Console output"
+description: "Learn how to print to the console using System.out.println and System.out.print, concatenate values with +, and embed newlines with \\n."
+---
+
+Java programs communicate results to the user through the console. The `DataTypes` project demonstrates the two main print methods and several ways to format multi-value output.
+
+## System.out.println
+
+`System.out.println` prints a line and then moves the cursor to the next line. Each call produces its own line of output.
+
+```java DataTypes.java
+System.out.println("Name: " + name);
+System.out.println("Age: " + age);
+System.out.println("Height: " + height + "ft");
+System.out.println("Smokes?: " + vaper);
+System.out.println("Symbol: " + symbol);
+```
+
+Running this produces:
+
+```
+Name: John
+Age: 26
+Height: 6.5ft
+Smokes?: false
+Symbol: W
+```
+
+## System.out.print
+
+`System.out.print` works the same way but does **not** add a newline at the end. The next `print` or `println` call continues on the same line.
+
+```java
+System.out.print("Hello ");
+System.out.print("world");
+System.out.println("!");
+// Output: Hello world!
+```
+
+Use `println` when you want each value on its own line, and `print` when you want to build up a line piece by piece.
+
+## String concatenation with +
+
+The `+` operator joins values into a single string. Java automatically converts non-string values (numbers, booleans, chars) to their string representation before joining.
+
+```java DataTypes.java
+System.out.println("Height: " + height + "ft");
+System.out.println("Sneakers: " + sneakers + "\nPrice: R" + price + "\nWeight: " + weight + "kg");
+```
+
+You can chain as many `+` operations together as you need.
+
+## Embedding newlines with \n
+
+Instead of calling `println` multiple times, you can embed the newline escape sequence `\n` inside a single string to break the output across multiple lines.
+
+```java DataTypes.java
+System.out.println(
+    "Name: " + name +
+    "\nAge: " + age +
+    "\nHeight: " + height +
+    "\nVaper? " + vaper +
+    "\nSymbol: " + symbol
+);
+```
+
+This produces the same output as five separate `println` calls:
+
+```
+Name: John
+Age: 26
+Height: 6.5
+Vaper? false
+Symbol: W
+```
+
+<Tip>
+Use `\n` inside a single `println` when you want to keep related output together as one logical unit. Use separate `println` calls when each line is conceptually independent.
+</Tip>
+
+## Full example
+
+Here is the complete `DataTypes.java` program showing both approaches side by side:
+
+```java DataTypes.java
+public class DataTypes {
+    public static void main(String[] args) {
+
+        String name = "Marley";
+        name = "John"; // Reassignment: variable now holds "John"
+        int age = 26;
+        double height = 6.5;
+        boolean vaper = false;
+        char symbol = 'W';
+
+        // One println per value
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Height: " + height + "ft");
+        System.out.println("Smokes?: " + vaper);
+        System.out.println("Symbol: " + symbol);
+
+        System.out.println("   ");
+
+        // All values in one println using \n
+        System.out.println(
+            "Name: " + name +
+            "\nAge: " + age +
+            "\nHeight: " + height +
+            "\nVaper? " + vaper +
+            "\nSymbol: " + symbol
+        );
+    }
+}
+```

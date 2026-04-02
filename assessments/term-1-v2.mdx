@@ -1,0 +1,239 @@
+---
+title: "Term 1 assessment v2"
+description: "Expanded term assessment using JOptionPane dialogs, age and birth year calculation, minutes lived, integer division and modulus, and String.charAt() indexing."
+---
+
+This is the revised version of the Term 1 assessment. It extends the original with interactive `JOptionPane` input, two age-related calculations, a theme park integer-division problem, and a `String.charAt()` bonus question.
+
+## Full source code
+
+```java Glasby_Nathan_Term1_v2.java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package glasby_nathan_term1_v2;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author natha
+ */
+public class Glasby_Nathan_Term1_v2 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+    
+    // Question 1
+        System.out.println("What kind of computer \"sings\" the best?\n\t... A Dell \\o/");
+        
+    System.out.println("");
+        
+    // Question 2
+        String Item = "8GB DDR5 Ram Module";
+        // System.out.println(Item);
+        
+        int quantity = 2;
+        // System.out.println(quantity);
+        
+        double price = 1125.99;
+        // System.out.println(price);
+        
+        char currency = 'R';
+        // System.out.println(currency);
+        
+        boolean inStock = true;
+        // System.out.println(inStock);
+        
+        double totalPrice = price * quantity;        
+        
+        System.out.println(quantity + " x " + Item + " at " + currency + " " + price + " each.");
+        System.out.println("Total: " + currency + " " + totalPrice);
+        System.out.println("In stock: " + inStock);
+    
+    System.out.println("");
+        
+    // Question 3.1 - ask user for age
+        String inputAge = JOptionPane.showInputDialog(null,
+                "Please enter your age:");
+        
+        int age = Integer.parseInt(inputAge);
+                
+    // Question 3.2 - calculate birth year
+        int currentYear = 2026;
+        int birthYear = currentYear - age;
+    
+        JOptionPane.showMessageDialog(null,
+                "You were most likely born in " + birthYear + ".");
+        
+        
+    // Question 3.3 - calculate minutes lived
+        int minutesLived = age * 365 * 24 * 60;
+        
+        JOptionPane.showMessageDialog(null,
+                "You have lived for " + minutesLived + " minutes.");
+     
+    System.out.println("");
+        
+    // Question 4 - theme park ride
+        int ticketHolders = 86;
+        int rideCapacity = 25;
+        
+        int fullRides = ticketHolders / rideCapacity;
+        int remainingPeople = ticketHolders % rideCapacity;
+        
+        System.out.println(fullRides + " rides will be full and "
+            + remainingPeople + " people will be on the last ride if "
+            + ticketHolders + " ticket holders are in the queue.");
+    
+    System.out.println("");  
+        
+    // Bonus Question - charAt
+    //               0123456789    
+    String player = "LeBron James";
+    System.out.println(player.charAt(8));           // a
+    
+    // print 'season'
+    System.out.println("" + player.charAt(11)       // s
+            + player.charAt(10)                     // e   
+            + player.charAt(8)                      // a  
+            + player.charAt(11)                     // s
+            + player.charAt(4)                      // o
+            + player.charAt(5)                      // n
+    );
+    }
+    
+}
+```
+
+## Question breakdown
+
+<AccordionGroup>
+  <Accordion title="Question 1 — escape sequences (spelling correction from v1)">
+    ```java
+    System.out.println("What kind of computer \"sings\" the best?\n\t... A Dell \\o/");
+    ```
+
+    This is identical in structure to [Term 1](/assessments/term-1) Question 1, with one correction: `"A Del"` is fixed to `"A Dell"` (the correct brand spelling). The escape sequences `\"`, `\n`, `\t`, and `\\` behave the same as before.
+  </Accordion>
+
+  <Accordion title="Question 2 — variables and receipt output (spacing fix from v1)">
+    ```java
+    double totalPrice = price * quantity;
+
+    System.out.println(quantity + " x " + Item + " at " + currency + " " + price + " each.");
+    System.out.println("Total: " + currency + " " + totalPrice);
+    System.out.println("In stock: " + inStock);
+    ```
+
+    The individual `System.out.println` calls for each variable are commented out in this version — only the final formatted summary is printed. The spacing bug from v1 is fixed: `" "` is added between `currency` and `totalPrice` so the output reads `R 2251.98` instead of `R2251.98`.
+  </Accordion>
+
+  <Accordion title="Question 3.1 — collecting age input with JOptionPane">
+    ```java
+    String inputAge = JOptionPane.showInputDialog(null, "Please enter your age:");
+    int age = Integer.parseInt(inputAge);
+    ```
+
+    `JOptionPane.showInputDialog` displays a GUI dialog and returns the user's text as a `String`. Because arithmetic is needed next, the string is immediately parsed to an `int` with `Integer.parseInt`.
+
+    This is the same pattern used in [Java Test 1](/assessments/java-test-1) Question 3 — always capture as `String` first, then convert.
+  </Accordion>
+
+  <Accordion title="Question 3.2 — birth year calculation">
+    ```java
+    int currentYear = 2026;
+    int birthYear = currentYear - age;
+
+    JOptionPane.showMessageDialog(null, "You were most likely born in " + birthYear + ".");
+    ```
+
+    The birth year is estimated by subtracting `age` from the hard-coded current year. The result is displayed in a modal message dialog using `JOptionPane.showMessageDialog` rather than the console. This contrasts with `showInputDialog`: one collects input, the other displays output.
+
+    The word "most likely" acknowledges that the calculation is approximate — it assumes the user's birthday has already passed this year.
+  </Accordion>
+
+  <Accordion title="Question 3.3 — minutes lived calculation">
+    ```java
+    int minutesLived = age * 365 * 24 * 60;
+
+    JOptionPane.showMessageDialog(null, "You have lived for " + minutesLived + " minutes.");
+    ```
+
+    This converts years to minutes using a chain multiplication:
+
+    ```
+    age × 365 days/year × 24 hours/day × 60 minutes/hour
+    ```
+
+    All values are `int`, so the result is also an `int`. For large ages this can approach or exceed `Integer.MAX_VALUE` (~2.1 billion), which would cause integer overflow. At Grade 10 level this edge case is not handled, but it is worth noting as a limitation of using `int` for large products.
+  </Accordion>
+
+  <Accordion title="Question 4 — integer division and modulus (theme park rides)">
+    ```java
+    int ticketHolders = 86;
+    int rideCapacity = 25;
+
+    int fullRides = ticketHolders / rideCapacity;
+    int remainingPeople = ticketHolders % rideCapacity;
+
+    System.out.println(fullRides + " rides will be full and "
+        + remainingPeople + " people will be on the last ride if "
+        + ticketHolders + " ticket holders are in the queue.");
+    ```
+
+    Integer division (`/`) gives the number of completely full rides:
+    - `86 / 25` → `3`
+
+    The modulus operator (`%`) gives the number of people on the partially-filled last ride:
+    - `86 % 25` → `11`
+
+    **Expected output:**
+    ```
+    3 rides will be full and 11 people will be on the last ride if 86 ticket holders are in the queue.
+    ```
+
+    This is the same `/` and `%` pattern from [Java Test 1](/assessments/java-test-1) Question 4 (sweet factory), applied to a different real-world scenario.
+  </Accordion>
+
+  <Accordion title="Bonus question — String.charAt() indexing">
+    ```java
+    //               0123456789
+    String player = "LeBron James";
+    System.out.println(player.charAt(8));           // a
+
+    System.out.println("" + player.charAt(11)       // s
+            + player.charAt(10)                     // e
+            + player.charAt(8)                      // a
+            + player.charAt(11)                     // s
+            + player.charAt(4)                      // o
+            + player.charAt(5)                      // n
+    );
+    ```
+
+    `String.charAt(index)` returns the `char` at a zero-based position inside the string. The index comment above the declaration maps each position:
+
+    | Index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+    |---|---|---|---|---|---|---|---|---|---|---|---|---|
+    | Char | L | e | B | r | o | n | ` ` | J | a | m | e | s |
+
+    The first `println` prints `player.charAt(8)` → `'a'`.
+
+    The second `println` concatenates six `charAt` calls in a specific order to spell the word **`season`**:
+
+    | Call | Index | Char |
+    |---|---|---|
+    | `charAt(11)` | 11 | s |
+    | `charAt(10)` | 10 | e |
+    | `charAt(8)` | 8 | a |
+    | `charAt(11)` | 11 | s |
+    | `charAt(4)` | 4 | o |
+    | `charAt(5)` | 5 | n |
+
+    The leading `"" +` is required to force string concatenation from the start. Without it, the first `+` between two `char` values would perform numeric addition instead of building a string.
+  </Accordion>
+</AccordionGroup>

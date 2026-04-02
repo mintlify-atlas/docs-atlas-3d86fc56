@@ -1,0 +1,86 @@
+---
+title: "Message dialogs"
+description: "Display pop-up messages to the user using JOptionPane.showMessageDialog, including plain messages and styled error dialogs."
+---
+
+The `MessageDialogs` project demonstrates how to show a pop-up dialog that presents information to the user rather than collecting input from them.
+
+## Basic message dialog
+
+`JOptionPane.showMessageDialog` opens a dialog with a message and an **OK** button. The program pauses until the user dismisses it.
+
+```java
+JOptionPane.showMessageDialog(null, "You have reached your destination.");
+```
+
+The method takes two arguments:
+
+| Argument | Value | Purpose |
+|---|---|---|
+| `parent` | `null` | The window that owns this dialog. `null` means the dialog appears centered on the screen with no parent window. |
+| `message` | Any string | The text displayed inside the dialog. |
+
+<Note>
+Passing `null` as the parent component is the standard approach in simple programs that do not have a main application window. The dialog will center itself on the screen.
+</Note>
+
+## Styled error dialogs
+
+You can pass two additional arguments to show a titled dialog with a specific icon.
+
+```java MessageDialogs.java
+JOptionPane.showMessageDialog(
+    null,
+    "Please restart GPS",
+    "Error Detected",
+    JOptionPane.ERROR_MESSAGE
+);
+```
+
+The four arguments are:
+
+| Argument | Description |
+|---|---|
+| `parent` | `null` — no parent window |
+| `message` | The body text shown in the dialog |
+| `title` | Text shown in the dialog's title bar |
+| `messageType` | An integer constant that sets the icon |
+
+### Message type constants
+
+| Constant | Icon shown |
+|---|---|
+| `JOptionPane.PLAIN_MESSAGE` | No icon |
+| `JOptionPane.INFORMATION_MESSAGE` | Blue info icon |
+| `JOptionPane.WARNING_MESSAGE` | Yellow warning triangle |
+| `JOptionPane.ERROR_MESSAGE` | Red error icon |
+| `JOptionPane.QUESTION_MESSAGE` | Question mark icon |
+
+## Full example
+
+```java MessageDialogs.java
+package messagedialogs;
+
+import javax.swing.*;
+
+public class MessageDialogs {
+
+    public static void main(String[] args) {
+
+        // Plain two-argument form
+        // JOptionPane.showMessageDialog(null, "You have reached your destination.");
+
+        // Four-argument form with title and error icon
+        JOptionPane.showMessageDialog(
+            null,
+            "Please restart GPS",
+            "Error Detected",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+}
+```
+
+<Tip>
+Use `showMessageDialog` when you only need to give the user information. When you need to collect text input, use `showInputDialog` instead — see [User input](/exercises/user-input).
+</Tip>

@@ -1,0 +1,155 @@
+---
+title: "Data types"
+description: "Primitive types (int, double, boolean, char) and the String reference type — how to declare, assign, and reassign variables in Java."
+---
+
+Every variable in Java has a **type** that tells the compiler what kind of value it can hold. Java separates types into two broad categories: *primitive* types (built into the language) and *reference* types (objects, including `String`).
+
+## Primitive types
+
+The four primitives you will use most often at this level are:
+
+| Type | Stores | Example literal |
+|---|---|---|
+| `int` | Whole numbers | `26` |
+| `double` | Decimal numbers | `6.5` |
+| `boolean` | `true` or `false` | `false` |
+| `char` | A single character | `'W'` |
+
+<Note>
+`char` literals use **single** quotes (`'W'`). `String` literals use **double** quotes (`"Word"`). Mixing them up causes a compile error.
+</Note>
+
+## String — a reference type
+
+`String` is not a primitive; it is an object. It stores a sequence of characters and is one of the most commonly used types in Java.
+
+```java
+String name = "Marley";
+```
+
+## Declaring and assigning variables
+
+The general pattern is:
+
+```
+type variableName = value;
+```
+
+From `DataTypes.java`:
+
+```java
+String name    = "Marley";
+int    age     = 26;
+double height  = 6.5;
+boolean vaper  = false;
+char   symbol  = 'W';
+```
+
+Each line:
+1. States the type (`String`, `int`, etc.)
+2. Gives the variable a name
+3. Assigns an initial value with `=`
+
+## Reassignment
+
+You can change a variable's value after the initial assignment. You do **not** repeat the type — just use the variable name:
+
+```java
+String name = "Marley";
+name = "John";  // reassignment — name now holds "John"
+```
+
+The comment in the original source explains this directly: *"the variable now holds 'John', so that is what prints below."*
+
+## Printing variables
+
+Concatenate variables with `+` to include their values inside a `println` call:
+
+```java
+System.out.println("Name: "   + name);
+System.out.println("Age: "    + age);
+System.out.println("Height: " + height + "ft");
+System.out.println("Smokes?: " + vaper);
+System.out.println("Symbol: " + symbol);
+```
+
+You can also combine multiple values on one line using `\n` for newlines (covered in [Escape sequences](/concepts/escape-sequences)):
+
+```java
+System.out.println(
+    "Name: "   + name   + "\n" +
+    "Age: "    + age    + "\n" +
+    "Height: " + height + "\n" +
+    "Vaper? "  + vaper  + "\n" +
+    "Symbol: " + symbol
+);
+```
+
+## A worked example
+
+The `MichaelJordan` project uses the same five types to describe a pair of sneakers:
+
+```java
+String  sneakers = "Michael Jordan \"Dynasty Collection\"";
+int     price    = 8000000;
+double  weight   = 1.8;
+boolean rare     = true;
+char    grade    = 'A';
+```
+
+<Tip>
+Notice the `\"` inside the `String` literal — that is an escape sequence used to include double-quote characters inside a string. See [Escape sequences](/concepts/escape-sequences) for the full list.
+</Tip>
+
+## The `char` type and Unicode
+
+A `char` can be assigned either a character literal or an integer that represents a Unicode code point. Both of the following store the letter `'b'`:
+
+```java
+char letter  = 'b';   // character literal
+char letter2 = 98;    // 98 is the Unicode value for 'b'
+```
+
+From `CharacterBuilding.java`:
+
+```java
+char letter  = 'a';
+char letter2 = 98;   // Unicode for 'b'
+char letter3 = 'A';
+char letter4 = 49;   // Unicode for '1'
+```
+
+<Tabs>
+  <Tab title="Character literals">
+    ```java
+    char letter  = 'a';
+    char letter3 = 'A';
+    System.out.println(letter);   // prints: a
+    System.out.println(letter3);  // prints: A
+    ```
+  </Tab>
+  <Tab title="Unicode integers">
+    ```java
+    char letter2 = 98;   // Unicode for 'b'
+    char letter4 = 49;   // Unicode for '1'
+    System.out.println(letter2);  // prints: b
+    System.out.println(letter4);  // prints: 1
+    ```
+  </Tab>
+</Tabs>
+
+## Quick reference
+
+```java
+// Declare and assign
+int     age    = 26;
+double  height = 6.5;
+boolean active = true;
+char    grade  = 'A';
+String  name   = "John";
+
+// Reassign (no type keyword)
+age  = 27;
+name = "Jane";
+```

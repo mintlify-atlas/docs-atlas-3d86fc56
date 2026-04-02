@@ -1,0 +1,118 @@
+---
+title: "Arithmetic"
+description: "Java's arithmetic operators: addition, subtraction, multiplication, division, and modulus — including the difference between integer and double division."
+---
+
+Java supports the standard arithmetic operators. The type of the operands determines what kind of result you get, which makes the distinction between integer and double division especially important.
+
+## Operators
+
+| Operator | Name | Example | Result |
+|---|---|---|---|
+| `+` | Addition | `1 + 1` | `2` |
+| `-` | Subtraction | `5 - 2` | `3` |
+| `*` | Multiplication | `3 * 3` | `9` |
+| `/` | Division | `8 / 3` | `2` (integer) |
+| `%` | Modulus (remainder) | `5 % 2` | `1` |
+
+From `JavaMaths.java`:
+
+```java
+System.out.println(1 + 1);  // 2
+System.out.println(5 - 2);  // 3
+System.out.println(3 * 3);  // 9
+System.out.println(8 / 3);  // 2  — integer division
+System.out.println(5 % 2);  // 1  — remainder
+```
+
+## Integer vs. double division
+
+This is one of the most common sources of confusion for new Java programmers.
+
+When **both** operands are `int`, the `/` operator performs **integer division**: it discards the fractional part of the result entirely — it does not round, it truncates.
+
+When **at least one** operand is a `double` (or `float`), the `/` operator performs **floating-point division** and keeps the decimal portion.
+
+```java
+System.out.println(5 / 2);      // 2   — integer division, decimal dropped
+System.out.println(5.0 / 2.0);  // 2.5 — double division, decimal kept
+```
+
+<Note>
+`8 / 3` gives `2`, not `2.67`. The `.67` is silently dropped. This is not rounding — `7 / 4` also gives `1`, not `2`.
+</Note>
+
+<Tabs>
+  <Tab title="Integer division">
+    ```java
+    int a = 8;
+    int b = 3;
+    System.out.println(a / b);  // 2 (not 2.666...)
+    ```
+    Both variables are `int`, so the result is `int`. The fractional part is truncated.
+  </Tab>
+  <Tab title="Double division">
+    ```java
+    double a = 5.0;
+    double b = 2.0;
+    System.out.println(a / b);  // 2.5
+    ```
+    Both variables are `double`, so the result preserves the decimal.
+  </Tab>
+  <Tab title="Mixed — one double">
+    ```java
+    System.out.println(5.0 / 2);  // 2.5
+    System.out.println(5 / 2.0);  // 2.5
+    ```
+    If either operand is a `double`, Java promotes the other to `double` before dividing.
+  </Tab>
+</Tabs>
+
+## Modulus `%`
+
+The modulus operator returns the **remainder** after division — the part left over when one integer does not divide evenly into another.
+
+```java
+System.out.println(5 % 2);  // 1  (5 = 2 × 2 + 1)
+System.out.println(8 % 3);  // 2  (8 = 3 × 2 + 2)
+System.out.println(6 % 3);  // 0  (6 divides evenly by 3)
+```
+
+<Tip>
+A common use of `%` is checking whether a number is even or odd:
+```java
+if (number % 2 == 0) {
+    System.out.println("even");
+} else {
+    System.out.println("odd");
+}
+```
+If `number % 2` equals `0`, the number is even.
+</Tip>
+
+## Order of operations
+
+Java follows standard mathematical precedence (BODMAS / PEMDAS):
+
+1. Parentheses `()`
+2. Multiplication `*`, Division `/`, Modulus `%` — left to right
+3. Addition `+`, Subtraction `-` — left to right
+
+```java
+System.out.println(2 + 3 * 4);    // 14  (multiplication first)
+System.out.println((2 + 3) * 4);  // 20  (parentheses first)
+```
+
+## Full example from JavaMaths.java
+
+```java
+System.out.println(1 + 1);   // 2
+System.out.println(5 - 2);   // 3
+System.out.println(3 * 3);   // 9
+System.out.println(8 / 3);   // 2  — integer division (cuts off decimal, no rounding)
+
+System.out.println(5 / 2);   // 2  — integer division
+System.out.println(5.0 / 2.0); // 2.5 — double division
+
+System.out.println(5 % 2);   // 1  — remainder (modulus)
+```

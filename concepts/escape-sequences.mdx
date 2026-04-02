@@ -1,0 +1,156 @@
+---
+title: "Escape sequences"
+description: "Special character sequences that let you embed newlines, tabs, quotes, and backslashes inside Java string literals."
+---
+
+Some characters cannot be typed directly into a Java string literal — either because they have a special meaning to the compiler (like `"`) or because they represent invisible formatting (like a newline). **Escape sequences** solve this by pairing a backslash `\` with a second character to represent the intended character.
+
+## Common escape sequences
+
+| Sequence | Name | What it does |
+|---|---|---|
+| `\n` | Newline | Moves output to a new line |
+| `\t` | Tab | Inserts a horizontal tab (indent) |
+| `\\` | Backslash | Prints a literal `\` character |
+| `\"` | Double quote | Prints a literal `"` inside a string |
+| `\'` | Single quote | Prints a literal `'` inside a string |
+
+<Note>
+Every escape sequence starts with a backslash. To print a backslash itself, you need two backslashes: `\\`.
+</Note>
+
+## `\n` — newline
+
+`\n` ends the current line and moves the cursor to the beginning of the next line. It is equivalent to pressing Enter in the middle of a string.
+
+```java
+System.out.println("Someone stole my Microsoft Office and they're gonna pay.\nYou have my Word.");
+```
+
+Output:
+```
+Someone stole my Microsoft Office and they're gonna pay.
+You have my Word.
+```
+
+## `\t` — tab
+
+`\t` inserts a tab stop, typically used to indent output.
+
+```java
+System.out.println("Someone \"stole\" my Microsoft\\Office\n\tand they're gonna pay.\n\t\tYou have my Word.");
+```
+
+Output:
+```
+Someone "stole" my Microsoft\Office
+	and they're gonna pay.
+		You have my Word.
+```
+
+This single `println` call uses four different escape sequences: `\"`, `\\`, `\n`, and `\t`.
+
+## `\\` — backslash
+
+Because `\` begins every escape sequence, a lone `\` would confuse the compiler. Use `\\` wherever you need a literal backslash in your output.
+
+```java
+System.out.println("C:\\Users\\Nathan\\Documents");
+```
+
+Output:
+```
+C:\Users\Nathan\Documents
+```
+
+## `\"` — double quote
+
+`String` literals are wrapped in double quotes, so a `"` inside the string would end it prematurely. Use `\"` to include a double-quote character in your output.
+
+```java
+String sneakers = "Michael Jordan \"Dynasty Collection\"";
+System.out.println(sneakers);
+```
+
+Output:
+```
+Michael Jordan "Dynasty Collection"
+```
+
+## `\'` — single quote
+
+You rarely need `\'` inside a `String` literal (single quotes are fine there), but it is required inside a `char` literal if the character itself is a single quote:
+
+```java
+char apostrophe = '\'';
+```
+
+## A complete example
+
+From `EscapeSequences.java` — a decorative box drawn entirely with escape sequences:
+
+```java
+System.out.println("//===============\\\\\n*                 *\n$   \"Hi there!\"   $\n$                 $\n*   \\(^-^)/                                       *\n//_______________\\\\");
+```
+
+You can also write this split across lines with `+` for readability:
+
+```java
+System.out.println(
+    "//===============\\\\\n" +
+    "*                 *\n" +
+    "$   \"Hi there!\"   $\n" +
+    "$                 $\n" +
+    "*   \\(^-^)/       *\n" +
+    "//_______________\\\\"
+);
+```
+
+Output:
+```
+//===============\\
+*                 *
+$   "Hi there!"   $
+$                 $
+*   \(^-^)/       *
+//_______________\\
+```
+
+<Tip>
+Breaking the long string across multiple lines (with `+` to concatenate) makes escape sequences much easier to read and debug.
+</Tip>
+
+Let's decode the sequences used in that example:
+
+<AccordionGroup>
+  <Accordion title="\\\\ - two backslashes in a row">
+    Each `\\` produces one `\` in the output. So `\\\\` prints `\\` — which is how the box corners are drawn.
+  </Accordion>
+  <Accordion title="\n - newline">
+    Ends the current line and starts a new one, allowing the whole box to be printed with a single `println` call.
+  </Accordion>
+  <Accordion title='\" - double quote'>
+    Embeds `"Hi there!"` (with its surrounding quotes) inside the string without ending the literal.
+  </Accordion>
+  <Accordion title="\\ - single backslash">
+    Used in `\(^-^)/` to print the backslash at the start of the emoticon.
+  </Accordion>
+</AccordionGroup>
+
+## Multiple `println` vs. escape sequences
+
+Both approaches produce the same output. Escape sequences reduce the number of lines of code:
+
+<Tabs>
+  <Tab title="Multiple println calls">
+    ```java
+    System.out.println("Someone stole my Microsoft Office and they're gonna pay.");
+    System.out.println("You have my Word.");
+    ```
+  </Tab>
+  <Tab title="Single println with \\n">
+    ```java
+    System.out.println("Someone stole my Microsoft Office and they're gonna pay.\nYou have my Word.");
+    ```
+  </Tab>
+</Tabs>

@@ -1,0 +1,122 @@
+---
+title: "Introduction to databases"
+description: "Introductory database work with the BaggageDB.mdb Microsoft Access file, covering what .mdb files are, how to open them, and the basic SQL concepts practised at this level."
+---
+
+The `!Databases/` folder in this repository contains a single file — `BaggageDB.mdb` — used to introduce relational database concepts as part of the Grade 10 IT curriculum.
+
+<Note>
+This is an introductory exercise file. The focus is on understanding what a database is, how to navigate it in a GUI tool, and how to write simple SELECT queries. No programming integration is required at this level.
+</Note>
+
+## What is a .mdb file?
+
+`.mdb` stands for **Microsoft Database**. It is the file format used by Microsoft Access 2003 and earlier to store a complete relational database in a single file. This includes:
+
+- **Tables** — structured data stored in rows and columns, similar to a spreadsheet.
+- **Queries** — saved SQL statements or visual query designs.
+- **Forms** — optional GUI interfaces for data entry.
+- **Reports** — formatted printable views of the data.
+
+Because everything lives in one file, `.mdb` files are easy to share and are commonly used in school and introductory IT courses.
+
+## How to open BaggageDB.mdb
+
+You need a tool that can read the Microsoft Access `.mdb` format.
+
+<Tabs>
+  <Tab title="Microsoft Access">
+    1. Open **Microsoft Access**.
+    2. Select **Open** → **Browse**.
+    3. Navigate to `!Databases/BaggageDB.mdb` in the repository folder.
+    4. Click **Open**.
+
+    The database opens with its tables listed in the left-hand navigation pane. Double-click any table to view its data.
+  </Tab>
+  <Tab title="LibreOffice Base">
+    1. Open **LibreOffice Base** (included with LibreOffice).
+    2. Choose **Connect to an existing database** → select **Microsoft Access** from the dropdown.
+    3. Click **Next**, then browse to `BaggageDB.mdb`.
+    4. Follow the remaining prompts and click **Finish**.
+
+    LibreOffice Base provides read and write access to `.mdb` files on Windows, macOS, and Linux without requiring a Microsoft Access licence.
+  </Tab>
+  <Tab title="MDB Viewer (Windows, read-only)">
+    1. Download and install a free MDB viewer such as **MDB Viewer Plus**.
+    2. Use **File → Open** to select `BaggageDB.mdb`.
+    3. Click any table name to browse its records.
+
+    This option is suitable for quickly inspecting the data but does not support running custom queries.
+  </Tab>
+</Tabs>
+
+## What BaggageDB represents
+
+The `BaggageDB` database models a baggage-handling or luggage-tracking scenario. It is a self-contained practice dataset designed to give students a realistic context in which to:
+
+- Explore a pre-built table structure.
+- Understand how data is organised into columns (fields) and rows (records).
+- Practise filtering and retrieving data with SQL queries.
+
+At Grade 10 level the database is intentionally small and straightforward — the goal is familiarity with the tool and the query language, not database design.
+
+## Basic SQL concepts practised at this level
+
+The following SQL skills are introduced using a database like `BaggageDB`.
+
+### Retrieving all records
+
+```sql
+SELECT * FROM Baggage;
+```
+
+`SELECT *` returns every column. `FROM Baggage` names the table. The semicolon terminates the statement. This is always the first query to run when exploring an unfamiliar table.
+
+### Retrieving specific columns
+
+```sql
+SELECT OwnerName, Weight FROM Baggage;
+```
+
+Replace `*` with a comma-separated list of column names to limit the output to only the fields you need.
+
+### Filtering rows with WHERE
+
+```sql
+SELECT * FROM Baggage WHERE Weight > 20;
+```
+
+The `WHERE` clause filters rows. Only records where the `Weight` column is greater than 20 are returned. Common comparison operators:
+
+| Operator | Meaning |
+|---|---|
+| `=` | Equal to |
+| `<>` | Not equal to |
+| `>` | Greater than |
+| `<` | Less than |
+| `>=` | Greater than or equal to |
+| `<=` | Less than or equal to |
+
+### Filtering text values
+
+```sql
+SELECT * FROM Baggage WHERE Destination = 'Cape Town';
+```
+
+Text values in SQL are wrapped in single quotes. The comparison is case-insensitive in Microsoft Access.
+
+### Sorting results
+
+```sql
+SELECT * FROM Baggage ORDER BY Weight DESC;
+```
+
+`ORDER BY` sorts the result set. `DESC` sorts from highest to lowest; `ASC` (the default) sorts from lowest to highest.
+
+### Counting records
+
+```sql
+SELECT COUNT(*) FROM Baggage WHERE Checked = True;
+```
+
+`COUNT(*)` returns the number of rows that match the condition. In Microsoft Access, boolean fields use `True` and `False`.

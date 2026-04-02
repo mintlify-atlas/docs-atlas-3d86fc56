@@ -1,0 +1,94 @@
+{
+  "projectType": "general",
+  "projectName": "IT10.1 — Grade 10 Java & SQL",
+  "projectDescription": "A collection of beginner Java exercises and SQL introductory work from a Grade 10 IT Term 1 course, covering variables, data types, math operations, GUI dialogs, and basic database concepts.",
+  "theme": "almond",
+  "primaryColor": "#007396",
+  "lightColor": "#e8f4f8",
+  "darkColor": "#005a75",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Overview",
+        "pages": ["introduction", "getting-started"]
+      },
+      {
+        "group": "Core Java Concepts",
+        "pages": [
+          "concepts/data-types",
+          "concepts/escape-sequences",
+          "concepts/arithmetic",
+          "concepts/type-conversion"
+        ]
+      },
+      {
+        "group": "Math & Randomness",
+        "pages": [
+          "exercises/math-methods",
+          "exercises/random-numbers",
+          "exercises/geometry"
+        ]
+      },
+      {
+        "group": "Input & Output",
+        "pages": [
+          "exercises/console-output",
+          "exercises/user-input",
+          "exercises/message-dialogs",
+          "exercises/login-validation"
+        ]
+      },
+      {
+        "group": "Assessments",
+        "pages": [
+          "assessments/java-test-1",
+          "assessments/term-1",
+          "assessments/term-1-v2"
+        ]
+      },
+      {
+        "group": "Databases",
+        "pages": [
+          "databases/introduction"
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "20+ self-contained Java mini-projects organised by topic",
+    "Covers variables, data types, escape sequences, arithmetic, and type casting",
+    "Math class usage: pow, sqrt, cbrt, round, abs, max, min",
+    "Random number generation with Math.random()",
+    "GUI input/output using JOptionPane dialogs",
+    "Introductory Swing form design with LoginUI",
+    "Term assessment exercises with worked examples",
+    "Introductory database work with a Microsoft Access file",
+    "Both NetBeans/Ant and Maven build configurations"
+  ],
+  "publicApiSurface": [
+    "Aftermath.main — circle area via random radius using Math.PI and Math.pow",
+    "Armathgeddon.main — square roots, cube roots, and random 4-digit PIN",
+    "ChangeIsGood.main — type conversion between String, int, double, char, boolean",
+    "CharacterBuilding.main — character literals and numeric character values",
+    "DataTypes.main — primitive/reference data types and formatted output",
+    "DiceRoller.main — two-dice simulation using Math.random()",
+    "EscapeSequences.main — escape sequences and console formatting",
+    "FullCircle.main — circle area from user-entered radius",
+    "HighsAndLows.main — Math.max and Math.min comparison",
+    "IveGotThePower.main — exponentiation with Math.pow",
+    "JavaMaths.main — basic arithmetic, integer division, and modulus",
+    "LoginCheck.main — dialog-based login validation",
+    "LoginUI — Swing form login interface",
+    "MessageDialogs.main — JOptionPane message dialog examples",
+    "NobodyPutsPythagorusInACorner.main — Pythagorean theorem hypotenuse",
+    "RandomGenerator.main — raw Math.random() output",
+    "RandomPractice.main — Math.random() scaled to different ranges",
+    "RealAltitude.main — Math.abs for altitude distance from sea level",
+    "SeeYouRound.main — rounding and VAT calculation",
+    "SomethingRandom.main — loops and phone-number-style random output",
+    "UserInput_.main — JOptionPane input with booking confirmation",
+    "Glasby_Nathan_JavaTest1.main — practical test: output, variables, user input, arithmetic",
+    "Glasby_Nathan_Term1.main — term assessment: variables, totals, formatted output",
+    "Glasby_Nathan_Term1_v2.main — term assessment: dialogs, age calc, division, charAt"
+  ]
+}

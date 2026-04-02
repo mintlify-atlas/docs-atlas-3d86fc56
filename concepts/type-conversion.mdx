@@ -1,0 +1,188 @@
+---
+title: "Type conversion"
+description: "Converting between Java types: widening and narrowing casts, parsing strings to numbers, and converting any value to a String."
+---
+
+Java is a **strongly typed** language — you cannot simply assign a value of one type to a variable of a different type without an explicit conversion. There are three main ways to convert between types: **casting**, **parsing**, and **String concatenation**.
+
+## Converting to String
+
+The simplest way to turn any value into a `String` is to concatenate it with an empty string `""`. Java automatically converts the other operand to a `String`.
+
+From `ChangeIsGood.java`:
+
+```java
+int     i  = 6;
+double  d  = 2.5;
+boolean b  = true;
+char    ch = 'A';
+
+String a = "" + i;   // "6"
+       a = "" + d;   // "2.5"
+       a = "" + b;   // "true"
+       a = "" + ch;  // "A"
+```
+
+<Tip>
+This works for every primitive type. It is the quickest approach when you need to combine a value into a message or store it as text.
+</Tip>
+
+## Converting to int
+
+### From String — `Integer.parseInt()`
+
+`Integer.parseInt()` reads a `String` and returns the `int` value it represents. The string must contain a valid whole number, otherwise a runtime exception is thrown.
+
+```java
+String st  = "8";
+int    num = Integer.parseInt(st);  // num = 8
+```
+
+### From double — narrowing cast
+
+Casting a `double` to an `int` is a **narrowing conversion**: the decimal part is dropped (truncated, not rounded). You must write the target type in parentheses before the value.
+
+```java
+double d   = 2.5;
+int    num = (int) d;  // num = 2  — decimal truncated
+```
+
+<Note>
+`(int) 2.9` gives `2`, not `3`. The fractional part is always discarded, regardless of its value.
+</Note>
+
+### From char
+
+A `char` can be assigned directly to an `int` — Java uses the character's Unicode code point as the integer value. No cast is required because this is a widening conversion.
+
+```java
+char ch  = 'A';
+int  num = ch;  // num = 65 (Unicode for 'A')
+```
+
+## Converting to double
+
+### From String — `Double.parseDouble()`
+
+`Double.parseDouble()` reads a `String` and returns the `double` value it represents.
+
+```java
+String st  = "8";
+double dec = Double.parseDouble(st);  // dec = 8.0
+```
+
+### From int — widening conversion
+
+Assigning an `int` to a `double` is a **widening conversion** (no information is lost), so no cast is required.
+
+```java
+int    i   = 6;
+double dec = i;  // dec = 6.0 — automatic widening
+```
+
+<Tabs>
+  <Tab title="Widening (automatic)">
+    ```java
+    int    i   = 6;
+    double dec = i;   // 6.0 — no cast needed
+    ```
+    The smaller type (`int`) fits inside the larger type (`double`) with no data loss.
+  </Tab>
+  <Tab title="Narrowing (explicit cast)">
+    ```java
+    double d   = 2.5;
+    int    num = (int) d;  // 2 — cast required, decimal dropped
+    ```
+    You must explicitly cast because precision is lost.
+  </Tab>
+</Tabs>
+
+## Converting to char
+
+### From String — `charAt()`
+
+`String.charAt(index)` returns the character at the specified position (zero-indexed).
+
+```java
+String st  = "8";
+char val = st.charAt(0);  // index 0 of "8" — val = '8'
+```
+
+### From int or double — explicit cast
+
+Casting a number to `char` interprets it as a Unicode code point.
+
+```java
+int    i   = 6;
+double d   = 2.5;
+
+char val = (char) i;  // char with Unicode value 6
+     val = (char) d;  // decimal truncated first, then converted
+```
+
+## Converting to boolean
+
+### From String — `Boolean.parseBoolean()`
+
+`Boolean.parseBoolean()` returns `true` if the string equals `"true"` (case-insensitive), and `false` for everything else.
+
+```java
+String  st = "true";
+boolean g  = Boolean.parseBoolean(st);  // true
+```
+
+A practical example from `ChangeIsGood.java` uses `JOptionPane` to get user input and store it as a `boolean`:
+
+```java
+boolean isExercising = Boolean.parseBoolean(
+    JOptionPane.showInputDialog("Are you exercising? (true/false)")
+);
+System.out.println(isExercising);
+```
+
+## Summary table
+
+| Target type | Source type | Method / syntax | Example |
+|---|---|---|---|
+| `String` | any primitive | `"" + value` | `"" + 6` → `"6"` |
+| `int` | `String` | `Integer.parseInt(s)` | `Integer.parseInt("8")` → `8` |
+| `int` | `double` | `(int) value` | `(int) 2.5` → `2` |
+| `int` | `char` | direct assignment | `int n = 'A'` → `65` |
+| `double` | `String` | `Double.parseDouble(s)` | `Double.parseDouble("8")` → `8.0` |
+| `double` | `int` | direct assignment | `double d = 6` → `6.0` |
+| `char` | `String` | `s.charAt(index)` | `"8".charAt(0)` → `'8'` |
+| `char` | `int` / `double` | `(char) value` | `(char) 65` → `'A'` |
+| `boolean` | `String` | `Boolean.parseBoolean(s)` | `Boolean.parseBoolean("true")` → `true` |
+
+## Full example from ChangeIsGood.java
+
+```java
+String  st = "8";
+int     i  = 6;
+double  d  = 2.5;
+char    ch = 'A';
+boolean b  = true;
+
+// To String
+String a = "" + i;   // "6"
+       a = "" + d;   // "2.5"
+       a = "" + b;   // "true"
+       a = "" + ch;  // "A"
+
+// To int
+int num = Integer.parseInt(st);  // 8
+    num = (int) d;               // 2 — narrowing, decimal dropped
+    num = ch;                    // 65 — Unicode value of 'A'
+
+// To double
+double dec = Double.parseDouble(st);  // 8.0
+       dec = i;                       // 6.0 — widening conversion
+
+// To char
+char val = st.charAt(0);  // '8'
+     val = (char) i;      // char for Unicode 6
+     val = (char) d;      // decimal truncated, then to char
+
+// To boolean
+boolean g = Boolean.parseBoolean(st);  // false ("8" is not "true")
+```

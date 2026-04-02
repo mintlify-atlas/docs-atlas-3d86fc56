@@ -1,0 +1,145 @@
+---
+title: "Math class methods"
+description: "Using Java's built-in Math class to perform powers, roots, rounding, absolute values, and comparisons."
+---
+
+Java's `Math` class provides a set of static methods for common mathematical operations. You call them directly on the class — no object is needed.
+
+```java
+// General pattern
+Math.methodName(arguments)
+```
+
+<Note>
+All `Math` methods are `static`, so you never write `new Math()`. Just call `Math.pow(...)`, `Math.sqrt(...)`, etc. directly.
+</Note>
+
+## Math.pow — raising to a power
+
+`Math.pow(base, exponent)` returns `base` raised to `exponent` as a `double`.
+
+**IveGotThePower** prompts the user for a base and an exponent, then computes the result:
+
+```java
+double result = Math.pow(number, power);
+
+JOptionPane.showMessageDialog(
+        null,
+        number + " to power of " + power + " is " + result + "."
+);
+```
+
+| Call | Result |
+|---|---|
+| `Math.pow(2, 3)` | `8.0` |
+| `Math.pow(5, 2)` | `25.0` |
+| `Math.pow(9, 0.5)` | `3.0` |
+
+## Math.sqrt and Math.cbrt — roots
+
+`Math.sqrt(n)` returns the square root of `n`. `Math.cbrt(n)` returns the cube root.
+
+**Armathgeddon** calculates both roots for a single input number:
+
+```java
+int square = Integer.parseInt(JOptionPane.showInputDialog(null, "Type the number you want to square root."));
+
+double squareRooted = Math.sqrt(square);
+System.out.println("The square root of " + square + " is " + squareRooted + ".");
+
+double cubeRooted = Math.cbrt(square);
+System.out.println("The cube root of " + square + " is " + cubeRooted + ".");
+```
+
+<Tip>
+`Math.sqrt(x)` is equivalent to `Math.pow(x, 0.5)`, but `sqrt` is clearer and slightly faster.
+</Tip>
+
+## Math.abs — absolute value
+
+`Math.abs(n)` removes the sign from a number, returning its distance from zero. This is useful whenever a value can be negative but you only care about its magnitude.
+
+**RealAltitude** uses `Math.abs` to convert a signed altitude reading (below or above sea level) into a plain distance:
+
+```java
+double altitude = Double.parseDouble(altitudeInput);
+
+double realDistance = Math.abs(altitude);
+
+JOptionPane.showMessageDialog(
+        null,
+        "The real distance from sea level is " + realDistance + " units."
+);
+```
+
+An input of `-340` and an input of `340` both produce `340.0`.
+
+## Math.round — rounding numbers
+
+`Math.round(n)` rounds to the nearest whole number. To round to a specific number of decimal places, scale up, round, then scale back down.
+
+**SeeYouRound** demonstrates basic rounding and then applies it to a VAT calculation:
+
+```java
+// Basic rounding behaviour
+System.out.println(Math.round(1.2));   // 1
+System.out.println(Math.round(1.5));   // 2
+System.out.println(Math.round(1.49));  // 1
+```
+
+```java
+// Round a sales price to 2 decimal places
+double salesPrice = costPrice * 1.15;
+
+salesPrice = salesPrice * 100;
+salesPrice = Math.round(salesPrice);
+salesPrice = salesPrice / 100.0;
+```
+
+The pattern `Math.round(value * 100) / 100.0` is the standard way to round to two decimal places in Java.
+
+<Warning>
+Divide by `100.0` (a `double`), not `100` (an `int`). Integer division would discard the decimal part entirely.
+</Warning>
+
+## Math.max and Math.min — comparisons
+
+`Math.max(a, b)` returns the larger of two values. `Math.min(a, b)` returns the smaller.
+
+**HighsAndLows** uses both to label two user-entered numbers:
+
+```java
+double num1 = Double.parseDouble(firstInput);
+double num2 = Double.parseDouble(secondInput);
+
+double highest = Math.max(num1, num2);
+double lowest  = Math.min(num1, num2);
+
+JOptionPane.showMessageDialog(
+        null,
+        highest + " is the highest number and " + lowest + " is the lowest number."
+);
+```
+
+## Math.PI — the constant π
+
+`Math.PI` is a `double` constant equal to approximately `3.141592653589793`. It is used in circle and sphere calculations.
+
+```java
+double area = Math.PI * Math.pow(radius, 2);
+```
+
+You will see `Math.PI` used extensively in the [Geometry exercises](/exercises/geometry).
+
+## Quick reference
+
+| Method | Description | Example |
+|---|---|---|
+| `Math.pow(b, e)` | `b` to the power `e` | `Math.pow(3, 2)` → `9.0` |
+| `Math.sqrt(n)` | Square root | `Math.sqrt(16)` → `4.0` |
+| `Math.cbrt(n)` | Cube root | `Math.cbrt(27)` → `3.0` |
+| `Math.abs(n)` | Absolute value | `Math.abs(-5)` → `5` |
+| `Math.round(n)` | Round to nearest integer | `Math.round(1.5)` → `2` |
+| `Math.max(a, b)` | Larger of two values | `Math.max(3, 7)` → `7` |
+| `Math.min(a, b)` | Smaller of two values | `Math.min(3, 7)` → `3` |
+| `Math.PI` | π constant | `3.141592653589793` |
